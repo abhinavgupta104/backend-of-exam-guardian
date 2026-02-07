@@ -198,10 +198,10 @@ Optional: append ?raw=1 to API requests to receive raw arrays/objects without th
 2) In Render, create a new Web Service and connect the repo.
 3) Set:
   - Build command: pip install -r requirements.txt
-  - Start command: python app.py
+  - Start command: gunicorn app:app --bind 0.0.0.0:$PORT
 4) Environment variables:
   - FLASK_HOST=0.0.0.0
-  - FLASK_PORT=10000 (or set PORT and FLASK_PORT will use it)
+  - PORT=10000 (Render sets this automatically)
   - CORS_ALLOWED_ORIGINS=["https://your-frontend.vercel.app"]
 5) Deploy and note the backend URL (for example https://your-app.onrender.com).
 

@@ -4,6 +4,7 @@ Contains all configuration settings for the Flask application
 """
 
 import os
+import json
 
 # Database configuration
 DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'database.db')
@@ -15,20 +16,33 @@ def _env_bool(name: str, default: bool = False) -> bool:
 	return value.strip().lower() in {'1', 'true', 'yes', 'on'}
 
 
+def _env_list(name: str, default: list) -> list:
+	value = os.getenv(name)
+	if value is None:
+		return default
+	try:
+		parsed = json.loads(value)
+		if isinstance(parsed, list):
+			return parsed
+	except json.JSONDecodeError:
+		pass
+	return [item.strip() for item in value.split(',') if item.strip()]
+
+
 # Flask configuration
 DEBUG = _env_bool('FLASK_DEBUG', default=False)
 TESTING = _env_bool('FLASK_TESTING', default=False)
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
 
 # CORS configuration
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = _env_list('CORS_ALLOWED_ORIGINS', [
 	'http://localhost:3000',
 	'http://127.0.0.1:3000',
 	'http://localhost:5173',
 	'http://127.0.0.1:5173',
 	'http://localhost:8080',
 	'http://127.0.0.1:8080'
-]
+])
 CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 
