@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="hero">
+    <h1>Admin Dashboard</h1>
+    <p>Quick view of ProctorGuard activity and records.</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>Students</h3>
+      <div class="metric">{{ stats.students }}</div>
+      <a class="link" href="{{ url_for('ui_students') }}">Manage students</a>
+    </div>
+    <div class="card">
+      <h3>Exams</h3>
+      <div class="metric">{{ stats.exams }}</div>
+      <a class="link" href="{{ url_for('ui_exams') }}">Manage exams</a>
+    </div>
+    <div class="card">
+      <h3>Alerts</h3>
+      <div class="metric">{{ stats.alerts }}</div>
+      <a class="link" href="{{ url_for('ui_alerts') }}">Review alerts</a>
+    </div>
+  </section>
+{% endblock %}

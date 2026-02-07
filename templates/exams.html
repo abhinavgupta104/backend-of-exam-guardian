@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="section">
+    <h1>Exams</h1>
+    <form class="form" method="post" action="{{ url_for('ui_exams') }}">
+      <div class="field">
+        <label for="name">Exam Name</label>
+        <input id="name" name="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="duration">Duration (minutes)</label>
+        <input id="duration" name="duration" type="number" min="0" value="0">
+      </div>
+      <div class="field">
+        <label for="total_questions">Total Questions</label>
+        <input id="total_questions" name="total_questions" type="number" min="0" value="0">
+      </div>
+      <button class="btn" type="submit">Add Exam</button>
+    </form>
+  </section>
+
+  <section class="section">
+    <h2>All Exams</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Duration</th>
+          <th>Total Questions</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for exam in exams %}
+          <tr>
+            <td>{{ exam.id }}</td>
+            <td>{{ exam.name }}</td>
+            <td>{{ exam.duration }}</td>
+            <td>{{ exam.total_questions }}</td>
+            <td>{{ exam.created_at }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="5" class="empty">No exams found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "ProctorGuard Admin" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">ProctorGuard</div>
+      <nav class="nav">
+        <a href="{{ url_for('ui_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('ui_students') }}">Students</a>
+        <a href="{{ url_for('ui_exams') }}">Exams</a>
+        <a href="{{ url_for('ui_alerts') }}">Alerts</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

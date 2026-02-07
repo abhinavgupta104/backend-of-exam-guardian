@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="section">
+    <h1>Alerts</h1>
+    <p class="subtle">Latest proctoring alerts across all exams.</p>
+  </section>
+
+  <section class="section">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student ID</th>
+          <th>Exam ID</th>
+          <th>Reason</th>
+          <th>Severity</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for alert in alerts %}
+          <tr>
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.student_id }}</td>
+            <td>{{ alert.exam_id }}</td>
+            <td>{{ alert.reason }}</td>
+            <td class="severity {{ alert.severity or '' }}">{{ alert.severity or '-' }}</td>
+            <td>{{ alert.timestamp }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="6" class="empty">No alerts found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
