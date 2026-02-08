@@ -41,7 +41,8 @@ CORS_ALLOWED_ORIGINS = _env_list('CORS_ALLOWED_ORIGINS', [
 	'http://localhost:5173',
 	'http://127.0.0.1:5173',
 	'http://localhost:8080',
-	'http://127.0.0.1:8080'
+	'http://127.0.0.1:8080',
+	'https://exam-guardian-seven.vercel.app'
 ])
 CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
