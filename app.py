@@ -571,6 +571,21 @@ def log_violation():
             severity='critical'
         )
 
+        # Save screenshot if provided
+        image_data = data.get('image')
+        if image_data:
+            try:
+                add_violation_screenshot(
+                    alert_id=alert_id,
+                    student_id=resolved_student_id,
+                    exam_id=resolved_exam_id,
+                    image_data=image_data,
+                    violation_type=violation_type
+                )
+                print(f"[ROUTE] Screenshot saved for alert {alert_id}")
+            except Exception as img_err:
+                print(f"[WARN] Failed to save screenshot: {img_err}")
+
         response = {'success': True, 'alert_id': alert_id}
         if wants_raw_response():
             return jsonify(response), 201
