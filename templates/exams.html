@@ -8,6 +8,10 @@
         <input id="name" name="name" type="text" required>
       </div>
       <div class="field">
+        <label for="code">Exam Code (students use this to join)</label>
+        <input id="code" name="code" type="text" placeholder="e.g. EXAM-001">
+      </div>
+      <div class="field">
         <label for="duration">Duration (minutes)</label>
         <input id="duration" name="duration" type="number" min="0" value="0">
       </div>
@@ -26,6 +30,7 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Code</th>
           <th>Duration</th>
           <th>Total Questions</th>
           <th>Created</th>
@@ -36,13 +41,14 @@
           <tr>
             <td>{{ exam.id }}</td>
             <td>{{ exam.name }}</td>
+            <td>{{ exam.code or '—' }}</td>
             <td>{{ exam.duration }}</td>
             <td>{{ exam.total_questions }}</td>
             <td>{{ exam.created_at }}</td>
           </tr>
         {% else %}
           <tr>
-            <td colspan="5" class="empty">No exams found.</td>
+            <td colspan="6" class="empty">No exams found.</td>
           </tr>
         {% endfor %}
       </tbody>

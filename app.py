@@ -695,8 +695,9 @@ def ui_exams():
             name = request.form.get('name', '').strip()
             duration = int(request.form.get('duration', '0') or 0)
             total_questions = int(request.form.get('total_questions', '0') or 0)
+            code = request.form.get('code', '').strip() or None
             if name:
-                add_exam(name=name, duration=duration, total_questions=total_questions)
+                add_exam(name=name, duration=duration, total_questions=total_questions, code=code)
             return redirect(url_for('ui_exams'))
 
         exams = fetch_all('SELECT * FROM exams ORDER BY created_at DESC')
